@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matthew Connell-Tombs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="carousel.css">
+    <link rel="icon" href="icons/M.png">
+
+
+    <style>
+        /* About Style*/
+        .about-container {
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60vw;
+            margin: 0 auto;
+        }
+
+        .about-container img {
+            float: left;
+            margin-right: 30px;
+            border-radius: 50%;
+            width: 225px;
+            height: 225px;
+        }
+
+        /* Contact Style*/
+        .contact-links {
+            max-width: 70vw;
+            display: flex;
+            margin: 0 auto 25px;
+        }
+
+        .contact-text {
+            flex-basis: 33.33%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-link {
+            font-size: 25px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a style="background-color: #F5F5F5; font-weight: 700;">Matthew Connell-Tombs</a></li>
+                <li><a style="background-color: #F5F5F5 ">|</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects-articles/projects-articles.html">Projects & Articles</a></li>
+                <li><a href="resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="about">
+        <div style="padding-top: 90px; padding-bottom: 100px">
+            <div class="title">
+                <p>About Me</p>
+            </div>
+            <div class="about-container">
+                <img src="MCT.jpg" alt="Profile Photo">
+                <p>
+                    Hi! My name is Matthew Connell-Tombs. I'm a highly-motivated University of Waterloo graduate
+                    with a Bachelors of Mathematics in Statistics. I'm passionate about data science, and using
+                    all sorts of neat tools and techniques to learn more about the world around us. Click around
+                    to learn more about me, and how I play around with data and coding to explore sports,
+                    board games, voting, and more!
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="skills">
+        <div style="background-color: #2B394A; padding: 50px 0 100px 0">
+            <div class="title" style="color: #F5F5F5">
+                <p>Skills</p>
+            </div>
+            <div class="arrow-wrapper">
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/python_icon.png" alt="python_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>Python</p>
+                                <p class="carousel-caption-small">Work Experience & <br> Personal Projects <br> <i> 5 Years </i></p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/r_icon.png" alt="r_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>R</p>
+                                <p class="carousel-caption-small"> Work Experience & <br> Personal Projects <br> <i> 5 Years </i></p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/sas_icon.png" alt="sas_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>SAS</p>
+                                <p class="carousel-caption-small"> Work Experience <br> <i> 2 Years </i> <br>&#8203; </p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/excel_icon.png" alt="excel_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>Excel</p>
+                                <p class="carousel-caption-small"> Work Experience & <br> Personal Projects <br> <i> 10 Years </i></p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/sql_icon.png" alt="sql_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>SQL</p>
+                                <p class="carousel-caption-small"> Personal Projects <br> <i>1 Year</i> <br>&#8203; </p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/js_icon.png" alt="js_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>JavaScript</p>
+                                <p class="carousel-caption-small"> Personal Projects <br> <i>1 Year</i> <br>&#8203; </p>
+                            </div>
+                        </div>
+                        <div class="carousel-card">
+                            <div class="carousel-icon-container">
+                                <img src="icons/html_icon.png" alt="html_icon" class="carousel-image">
+                            </div>
+                            <div class="carousel-caption">
+                                <p>HTML</p>
+                                <p class="carousel-caption-small"> Personal Projects <br> <i>1 Year</i> <br>&#8203; </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="arrow-button left-arrow">&lt;</button>
+                <button class="arrow-button right-arrow">&gt;</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div style="padding-top: 50px">
+            <div class="title">
+                <p>Contact Me</p>
+            </div>
+            <div class="contact-links">
+                <div class="contact-text">
+                    <img src="icons/email_icon.png" alt="email_icon" style="height: 28px";>
+                    <a href="mailto: m2connel@uwaterloo.ca">
+                        <span class="contact-link">m2connel@uwaterloo.ca</span></a>
+                </div>
+                <div class="contact-text">
+                    <img src="icons/linkedin_icon.png" alt="linkedin_icon" style="height: 32px";>
+                    <a href="https://www.linkedin.com/in/matthew-connell-tombs-0232b8239/" target="_blank">
+                        <span class="contact-link">Matthew Connell-Tombs</span></a>
+                </div>
+                <div class="contact-text">
+                    <img src="icons/github_icon.png" alt="github_icon" style="height: 36px";>
+                    <a href="https://matthewconnelltombs.github.io/" target="_blank">
+                        <span class="contact-link">Matthew Connell-Tombs</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="skills.js"></script>
+
+
+</body>
+</html>
