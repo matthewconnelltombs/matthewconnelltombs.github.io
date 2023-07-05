@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arbitrage Betting</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="icon" href="../../icons/M.png">
+
+    <style>
+        /* Remove up/down arrows from number input */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+         }
+
+        th:first-child, td:first-child {
+            border: none;
+        }
+
+        td {
+            border: 1px solid #ccc;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a style="background-color: #F5F5F5; font-weight: 700;">Matthew Connell-Tombs</a></li>
+                <li><a style="background-color: #F5F5F5 ">|</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects-articles.html">Projects & Articles</a></li>
+                <li><a href="../../resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div>
+        <img src="arbitrage.jpg" alt="" style="width: 100%;" class="bg_image">
+        <div class="image-caption">Arbitrage Betting</div>
+    </div>
+
+
+    <div class="content">
+        <div class="title">
+            <p>Arbitrage Betting</p>
+        </div>
+
+        <p>
+            The saying, "the house always wins" is a prevalent belief encountered in the world of gambling and luck.
+            As one of my favorite quotes about luck says:<br>
+            "I believe that whether you play or not, your odds of winning the lottery remain the same."
+            - Fran Lebowitz<br>
+            But what if we were to challenge the notion that the house always comes out on top? Similar to card
+            counting, there exist a multitude of strategies to outsmart the house when it comes to gambling or
+            betting on outcomes.<br>
+            Let’s delve into one such method called arbitrage betting.
+            <br><br>
+            According to the Oxford Dictionary, "<b>arbitrage</b>" refers to the practice of buying something (for example,
+            shares or foreign money) in one place, and selling it in another place where the price is higher.
+            <br><br>
+            The idea behind arbitrage betting is to take advantage of the discrepancy between prices, or in betting
+            terms, the odds offered by different bookmakers. If enough of a discrepancy exists, then we are able to
+            place bets covering all possible outcomes of an event, with each of those bets having a winning outcome
+            that would cover the cost to place each bet and some. Before diving into an example, let’s discuss some
+            different types of betting odds, along with how we can convert these odds into probabilities.
+            <br><br>
+            The two types of odds we will discuss are <b>decimal odds</b> (also known as European odds) and
+            <b>money line odds</b>. (also known as American odds).<br>
+            Decimal odds represents the amount one wins for every $1 wagered. This amount includes the initial stake
+            you bet with, so it represents your total payout, not your profit.
+            <br><br>
+            Money line odds are accompanied by either a plus sign (+) or a minus sign (-). The number accompanying a
+            plus sign indicates the amount of money you would win for each $100 wagered. The number accompanying a
+            minus sign indicates the amount of money you would need to wager to win $100. Unlike decimal odds, these
+            numbers represent profit, meaning that you are returned your initial stake <i>plus</i> your winnings if your
+            bet is correct.
+            <br><br>
+            Below is a calculator to convert between the two types of odds, along with the formulas.
+        </p>
+
+        <div style="display: flex; align-items: center;">
+            <div style="width: 55%">
+                <div>
+                    <label for="dec_box">Decimal Odds:</label>
+                    <input type="number" id="dec_box" oninput="dectoml('dec_box','ml_box')">
+                </div>
+                <br><br><br><br><br>
+                <div>
+                    <label for="ml_box">Money Line Odds:</label>
+                    <input type="number" id="ml_box" oninput="mltodec('ml_box','dec_box')">
+                </div>
+            </div>
+            <div style="margin-left: 50px">
+                <img src="formulas_1.png" style="width: 85%"
+                     alt="Formulas to convert between decimal and money line odds"/>
+            </div>
+        </div>
+
+
+        <p>
+            Now that we know how the different types of odds work, we can see how to convert them to their
+            implied probabilities. The formula for implied probability is your total stake for the bet divided
+            by the total payout (initial stake plus profit).
+            <br><br>
+            For decimal odds, the implied probability is simply the inverse of the odds.<br>
+            For money line odds, it depends on whether the odds are positive or negative. Implied probability
+            for positive money line odds are calculated by dividing 100, your wager amount, by the possible return,
+            which would be 100 plus the money line odds. Implied probability for negative money line odds are
+            calculated by dividing the money line odds, by the money line odds minus 100.
+        </p>
+
+
+        <div style="display: flex; align-items: center; margin-top: -40px">
+            <div style="width: 20%">
+                <div>
+                    <label for="dec_prob_box">Decimal Odds:</label>
+                    <input type="number" id="dec_prob_box" oninput="dectoprob('dec_prob_box', 'dec_prob')">
+                </div>
+                <br>
+                <div>
+                    <label for="ml_prob_box">Money Line Odds:</label>
+                    <input type="number" id="ml_prob_box" oninput="mltoprob('ml_prob_box','ml_prob')">
+                </div>
+            </div>
+            <div style="margin-left: 50px; width: 20%">
+                <div>
+                    <label for="dec_prob">Implied Probability:</label>
+                    <input type="text" id="dec_prob" readonly>
+                </div>
+                <br>
+                <div>
+                    <label for="ml_prob">Implied Probability:</label>
+                    <input type="text" id="ml_prob" readonly>
+                </div>
+            </div>
+            <div style="text-align: center">
+                <img src="formulas_2.png" style="width: 85%; margin-top: 70px"
+                     alt="Formulas to convert from odds to implied probabilities."/>
+            </div>
+        </div>
+
+        <p>
+            Now that we have covered the basics, let's look at an example. Imagine we want to bet on the Toronto
+            Blue Jays versus the New York Yankees. A bookmaker gives us decimal odds of 2.3 for the Blue Jays and
+            1.7 for the Yankees. Converting these into implied probabilities, we have 43.48% for the Blue Jays,
+            and 58.82% for the Yankees.
+            <br><br>
+            You might have noticed that those do not add to 100% (43.48% + 58.82% = 102.30%). That is because these
+            are not “fair” odds. The margin over 100%, in this case 2.30%, represents the bookmaker's potential
+            profit margins. So if we were to place two bets, one on each team to win, proportional to their implied
+            probabilities to win, we would have placed $102.30 in bets, with a guaranteed winning of $100. Obviously
+            this is a bad bet.
+            <br><br>
+            When we revisit the definition of arbitrage, we are reminded that we need two different places to
+            buy and sell. So, we find a second bookmaker.
+            <br><br>
+            This bookmaker believes that the Blue Jays and Yankees are more evenly matched, and so is offering
+            decimal odds of 2.15 for the Blue Jays and 1.8 for the Yankees. Calculating the implied probabilities
+            for this bookmaker yields 46.51% for the Blue Jays and 55.56% for the Yankees. Again, we see that these
+            are not fair odds as the sum is greater than 100% (46.51% + 55.56% = 102.07%).
+            <br><br>
+            However, something interesting happens when we consider making one bet with one bookmaker, and one bet
+            with the other. If we were to place one bet with the first bookmaker for the Blue Jays to win at 2.3
+            (43.48%) and another bet with the second bookmaker for the Yankees to win at 1.8 (55.56%), we can see
+            the implied probabilities sum to less than 100% (43.48% + 55.56% = 99.04%). This means the odds are no
+            longer in favor of the bookmakers — instead, they are in our favor.
+            <br><br>
+            If we place bets that are proportional to the implied probabilities on each team to win — in our case,
+            betting $43.48 on the Blue Jays to win at 2.3, and $55.56 on the Yankees to win at 1.8 — we are
+            <i>guaranteed</i> profit. In total we spent $43.48 + $55.56 = $99.04 on our bets. If the Blue Jays win,
+            we have a payout of 2.3 x $43.48 = $100. If the Yankees win, we have a payout of 1.8 x $55.56 = $100.
+            Therefore, we have profited $0.96 for our $100 investment, or approximately a 1% return. While this does
+            seem like a small return, the important piece to remember is that this is a guaranteed return. By using
+            arbitrage, all chance has been removed from the equation. Regardless of the outcome of the game, the 1%
+            profit will exist.
+        </p>
+
+        <table>
+            <tr>
+                <th> </th>
+                <th>Blue Jays Win</th>
+                <th>Yankees Win</th>
+                <th>Sum of Probabilities</th>
+            </tr>
+            <tr>
+                <th>Bookmaker 1</th>
+                <td>2.3 <br> 43.48%</td>
+                <td>1.7 <br> 58.82%</td>
+                <td>102.30%</td>
+            </tr>
+            <tr>
+                <th>Bookmaker 2</th>
+                <td>2.15 <br> 46.51%</td>
+                <td>1.8 <br> 55.56%</td>
+                <td>102.07%</td>
+            </tr>
+            <tr>
+                <th>Bookmaker 1 - BJ Win <br> Bookmaker 2 - Y Win</th>
+                <td>2.15 <br> 43.48%</td>
+                <td>1.7 <br> 55.56%</td>
+                <td>99.04%</td>
+            </tr>
+        </table>
+
+        <p>
+            Although not living up the to “get rich quick scheme” promised in the article description, we see that
+            despite the common belief that the "the house always wins," using math we have found not only a way to
+            turn the odds in our favor, but actually creates a guaranteed return, taking all the risk out of betting.
+        </p>
+    </div>
+
+
+    <script src="arbitrage_calc.js"></script>
+
+
+</body>
+</html>
