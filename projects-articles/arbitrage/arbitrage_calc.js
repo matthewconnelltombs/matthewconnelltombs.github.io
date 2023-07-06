@@ -2,7 +2,7 @@
 function dectoml(inputbox, updatebox) {
     let inputvalue = document.getElementById(inputbox).value;
 
-    if (inputvalue > 2){
+    if (inputvalue >= 2){
         document.getElementById(updatebox).value = Math.round(100*(inputvalue-1)*1000)/1000
     } else if (inputvalue > 1) {
         document.getElementById(updatebox).value = Math.round(-100/(inputvalue-1)*1000)/1000
