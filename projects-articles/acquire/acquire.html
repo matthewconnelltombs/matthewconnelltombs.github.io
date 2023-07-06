@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acquire</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../carousel.css">
+    <link rel="icon" href="../../icons/M.png">
+
+    <style>
+        .carousel-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #F5F5F5;
+            border: 1px solid #ccc;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a style="background-color: #F5F5F5; font-weight: 700;">Matthew Connell-Tombs</a></li>
+                <li><a style="background-color: #F5F5F5 ">|</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects-articles.html">Projects & Articles</a></li>
+                <li><a href="../../resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div>
+        <img src="acquire_bg.webp" alt="" class="bg_image">
+    </div>
+
+
+    <div class="content">
+        <div class="title">
+            <p>The Brief</p>
+        </div>
+
+        <p>
+            Acquire is a strategy board game where players assume the role of real estate tycoons. Designed for
+            2 to 6 players, the game revolves around building and expanding hotel chains, alongside making
+            strategic investments. Players strategically place tiles to create, expand, and connect hotel chains.
+            This allows them to earn stocks and shareholder bonuses. The game requires careful planning and
+            calculated decision-making as players compete to gain majority ownership of hotel chains,
+            triggering lucrative buyouts.
+            <br><br>
+            After successfully <a href="../yahtzee/yahtzee.html">coding Yahtzee in Python</a>, I decided it
+            was time to up the difficulty and code another favorite, yet slightly more complicated board game,
+            Acquire. If you’re familiar with Acquire, you’ll know that it is a pretty old game, and quite
+            difficult to find in stores -- so that was another incentive for me to code it!
+            <br><br>
+            Similarly to Yahtzee, this game is implemented in Python using the pygame and numpy libraries.
+        </p>
+
+        <div class="title">
+            <p>The Results</p>
+        </div>
+
+        <p>
+            Below we can see the opening screen of the game:
+        </p>
+
+        <img src="acquire_start.png" alt="" style="width: 100%;">
+
+        <p>
+            The player names are stored in a .txt file with the .py file. Each player's turn starts with
+            clearing any player information, and a prompt for whose turn it is. They then can see their
+            hand of tiles, stocks they own, and remaining money. Players continue placing tiles until a
+            hotel chain is formed. After selecting the chain, the true fun of the game starts as players
+            can now start buying stocks in the chain, start other rival hotel chains, and eventually force
+            acquisitions. During a merger, if there ever is a tie in size of hotels, the active player
+            decides which hotel is to be treated as the larger one. Once the end game conditions are met,
+            on their turn each player is asked if they want to end the game. Once it’s game over, the final
+            scores are calculated and displayed so the winner can start celebrating!
+        </p>
+
+        <div class="arrow-wrapper">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-card">
+                        <img src="acquire_1.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_2.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_3.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_4.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_5.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_6.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_7.png" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="acquire_8.png" alt="" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <button class="arrow-button left-arrow" onclick="prevPhoto()">&lt;</button>
+            <button class="arrow-button right-arrow" onclick="nextPhoto()">&gt;</button>
+        </div>
+
+
+    </div>
+
+
+    <script src="../project_photos.js"></script>
+
+
+</body>
+</html>
