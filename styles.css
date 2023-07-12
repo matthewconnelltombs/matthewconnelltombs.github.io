@@ -1,3 +1,6 @@
+/* Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla&family=Martel&display=swap');
 
 /* Navigation Bar */
 .navbar {
@@ -34,7 +37,6 @@
 }
 
 
-
 /* Image Format */
 .bg_image {
   height: calc(100vh - 60px);
@@ -55,13 +57,11 @@
 }
 
 
-
-
 /* Body Format */
 body {
   font-family: 'Martel', serif;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 20px;
   color: #2B394A;
   margin: 0;
   padding: 0;
@@ -89,5 +89,3 @@ h1, h2, h3, h4, h5, h6 {
   text-align: left;
   padding-bottom: 50px;
 }
-
-
