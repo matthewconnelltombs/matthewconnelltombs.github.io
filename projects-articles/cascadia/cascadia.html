@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascadia</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../carousel.css">
+    <link rel="icon" href="../../icons/M.png">
+
+    <style>
+        .carousel-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: #F5F5F5;
+            border: 1px solid #F5F5F5;
+        }
+
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .image-item {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .image-item img {
+            height: 100px;
+        }
+
+        .image-item p {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a style="background-color: #F5F5F5; font-weight: 700;">Matthew Connell-Tombs</a></li>
+                <li><a style="background-color: #F5F5F5 ">|</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects-articles.html">Projects & Articles</a></li>
+                <li><a href="../../resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div>
+        <img src="cascadia_bg.jpg" alt="" class="bg_image">
+    </div>
+
+
+    <div class="content">
+        <div class="title">
+            <p>The Brief</p>
+        </div>
+
+        <p>
+            Cascadia is a tile-laying board game where players create diverse ecosystems by strategically placing tiles
+            that represent different landscapes, such as forests, rivers, and mountains. Each tile attracts specific
+            wildlife species, represented by animal tokens. Players score points by creating large groupings of one
+            kind of ecosystem along with creating specifically shaped packs of animal tokens. At the end of the game,
+            the highest scoring habitat wins! If you want to read more about Cascadia, click
+            <a href="https://www.alderac.com/wp-content/uploads/2021/08/Cascadia-Rules.pdf" target="_blank">here</a>.
+            <br><br>
+            I am a huge fan of Cascadia. I think it has something to do with the fact that each turn requires you to
+            only make one decision; a decision that seems simple, and yet can be extremely impactful to your chances
+            of winning or losing the game. However, at the end of the game, all players have to stare at their boards
+            and try to count their points. Sometimes it's easy. Sometimes it’s not. And sometimes (often) I’m a
+            little lazy.
+            <br><br>
+            So, I decided to try and create an app that takes as input pictures of the players boards, and outputs
+            the final score.
+            <br><br>
+            I will note ahead of time that getting image recognition for certain parts of the game (i.e. habitats) is
+            expected to be extremely difficult. I will be prioritizing scoring the animal tokens and nature tokens
+            first, and then attempting the habitats.
+        </p>
+
+        <div class="title">
+            <p>The Results</p>
+        </div>
+
+        <p>
+            Before diving in, let's quickly go over the game pieces:
+        </p>
+
+        <div class="image-row">
+            <div class="image-item">
+                <img src="animals.jpg" alt="Animal Tokens">
+                <p>Animal Tokens</p>
+            </div>
+            <div class="image-item">
+                <img src="tiles.jpg" alt="Habitat Tiles">
+                <p>Habitat Tiles</p>
+            </div>
+            <div class="image-item">
+                <img src="nature.jpg" alt="Nature Token">
+                <p>Nature Token</p>
+            </div>
+        </div>
+        <div class="image-row">
+            <div class="image-item">
+                <img src="scoring.jpg" alt="Scoring Cards" style="height: 200px">
+                <p>Scoring Cards</p>
+            </div>
+        </div>
+
+        <p>
+            Note: I have made progress towards completing this project, however there will be an update in the future
+            when the project is finished!
+            <br><br>
+            To score the player boards, I needed the app to have the ability to recognize animals, nature tokens,
+            and habitat tiles. For image recognition and segmentation, I decided to use ultralytics YOLOv8. As there
+            was not a ready made dataset, I scraped
+            <a href="https://boardgamegeek.com/boardgame/295947/cascadia" target="_blank">BoardGameGeek’s Cascadia</a>
+            page for images of player boards to train on. I used the package LabelImg to classify the different animals
+            and nature tokens. After that, it just came down to training the models.
+            <br><br>
+            I chose to train two separate models, one for the nature tokens, and one for the animals.
+            They both took surprisingly little time!
+            <br><br>
+            For the nature tokens, this is essentially all that needed to be done, as a player scores one point per
+            token. Counting the number of detected objects gives us the points scored.
+            <br><br>
+            However, for animal scoring, there is much more ahead. The animals are scored on their relative positions
+            to each other, meaning that I needed to be able to detect which animals are beside other animals, which
+            animals are between other animals, and so on. For this I decided to recreate the hexagonal grid of the
+            board, ignoring the habitats and transforming the animals into the tiles. This would then hopefully
+            simplify a lot of the calculations for determining adjacency and such things.
+            <br><br>
+            I did this by starting with the midpoint of each detected animal and using that as the center of my
+            hexagons. For the hexagonal grid, I had a number of options to choose from for a coordinate system. I had
+            originally planned on using an <b>offset coordinate system</b>, where each tile has two coordinates and
+            depending on even/odd, you would know if it was an offset row/column. I ended up changing my mind — while
+            probably easier to initially code, I anticipated problems could arise with more complicated calculations.
+            <br><br>
+            So instead, I decided on the <b>cube coordinate system</b>, where there are 3 axes, so each tile had 3
+            coordinates, with the nifty property that they sum to 0. This proved to make further calculations quite
+            straightforward. Knowing that all animals must be touching another animal, I decided to take the approach
+            of starting to recreate the grid with one animal, then add all adjacent animals to the original one, and
+            then one by one add all adjacent animals to each of those, and so on. After that, I just had to grab the
+            animal type when drawing the tile and color it.
+            <br><br>
+            Below is a series of pictures showing every step: the original board, image detection of animal tokens,
+            image detection of nature tokens, game board mid points, hexagonal game board, hexagonal game board with
+            animal colors.
+        </p>
+
+        <div class="arrow-wrapper">
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-card">
+                        <img src="Step_0.jpg" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="Step_1a.jpg" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="Step_1b.jpg" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="Step_2.jpg" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="Step_3.jpg" alt="" style="width: 100%;">
+                    </div>
+                    <div class="carousel-card">
+                        <img src="Step_4.jpg" alt="" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <button class="arrow-button left-arrow" onclick="prevPhoto()">&lt;</button>
+            <button class="arrow-button right-arrow" onclick="nextPhoto()">&gt;</button>
+        </div>
+
+        <p>
+            At this point, the board is fully recreated, and so now it is time to score it.
+            <br><br>
+            There are 3 avenues for scoring points in Cascadia: animals, nature tokens, and habitats.
+            <br><br>
+            As far as animal scoring goes, players spend the game strategically placing animals to achieve wildlife
+            goals. The wildlife goals for a given game are determined by wildlife scoring cards that are selected at
+            the start of the game. There are 5 animals, and each has 4 variations of scoring cards — so 20 different
+            functions. Once those were complete, it was as simple as having the user provide a path to the image and
+            input the scoring cards in play (A, B, C, or D for each animal type).
+            <br><br>
+            As I mentioned earlier, nature tokens are simple — one point per token.  Now, we can score two of the
+            three different point scoring methods. At this point the function takes < 1 second to score a player board.
+        </p>
+
+        <div class="image-row">
+            <img src="score.JPG" alt="" style="height: 200px">
+        </div>
+
+        <p>
+            The next step will be implementing image segmentation for the habitats, and then scoring them. I have
+            already started on this, and while having had some success, it is proving difficult to build a model that
+            can accurately detect all habitats with very high accuracy. There are 2 main things that make scoring the
+            habitats difficult:
+        </p>
+            <ol>
+                <li>Players place animals <i>on</i> the habitat tiles, covering a large portion of them.</li>
+                <li>The different habitats are represented by non-homogenous designs, involving varying colors
+                    and patterns. This is much more difficult to detect than consistent, uniform patterns.</li>
+            </ol>
+        <p>
+            I am currently working to solve this issue, and will update this once I have something!
+        </p>
+        <p style="font-size: 15px">
+            (Or I’ll have to shamefully go back to scoring the game manually.)
+        </p>
+
+
+
+
+    </div>
+
+
+    <script src="../project_photos.js"></script>
+
+
+</body>
+</html>
