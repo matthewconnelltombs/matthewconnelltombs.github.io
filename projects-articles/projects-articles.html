@@ -35,8 +35,18 @@
             font-size: 40px;
         }
 
-        .article img {
-            padding-right: 10px;
+        .article-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 175px;
+                width: 275px;
+                margin: 15px 15px 0 0;
+        }
+
+        .article-image img {
+            width: auto;
+            height: 100%;
         }
 
         .article-link {
@@ -83,6 +93,23 @@
                 Projects
             </div>
 
+            <a href="cascadia/cascadia.html" class="article-link">
+                <div class="article">
+                    <div class="article-text">
+                        <h2>Cascadia</h2>
+                        <p>I used AI to automate the scoring for one of my favorite board games,
+                            since I'm too lazy to count.<br>
+<!--                        Tags: <i>Project, Games</i>-->
+                        </p>
+                    </div>
+                    <div class="article-image">
+                        <img src="cascadia/cascadia.jpg" alt="">
+                    </div>
+                </div>
+            </a>
+
+            <div class="divider"></div>
+
             <a href="acquire/acquire.html" class="article-link">
                 <div class="article">
                     <div class="article-text">
@@ -91,7 +118,9 @@
 <!--                        Tags: <i>Project, Games</i>-->
                         </p>
                     </div>
-                    <img src="acquire/acquire_bg.webp" alt="" style="width: 250px; margin-top: 10px">
+                    <div class="article-image">
+                        <img src="acquire/acquire_bg.webp" alt="">
+                    </div>
                 </div>
             </a>
 
@@ -105,7 +134,9 @@
 <!--                        Tags: <i>Project, Games</i>-->
                         </p>
                     </div>
-                    <img src="yahtzee/yahtzee_bg.webp" alt="" style="width: 250px; margin-top: 10px">
+                    <div class="article-image">
+                        <img src="yahtzee/yahtzee_bg.webp" alt="">
+                    </div>
                 </div>
             </a>
 
@@ -137,7 +168,9 @@
 <!--                        Tags: <i>Article, Sports</i>-->
                         </p>
                     </div>
-                    <img src="arbitrage/arbitrage.jpg" alt="" style="width: 250px; margin-top: 10px">
+                    <div class="article-image">
+                        <img src="arbitrage/arbitrage.jpg" alt="">
+                    </div>
                 </div>
             </a>
 
