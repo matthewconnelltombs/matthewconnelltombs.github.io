@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Snake AI</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../carousel.css">
+    <link rel="icon" href="../../icons/M.png">
+
+    <style>
+        .video-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="navbar">
+                <li><a style="background-color: #F5F5F5; font-weight: 700;">Matthew Connell-Tombs</a></li>
+                <li><a style="background-color: #F5F5F5 ">|</a></li>
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects-articles.html">Projects & Articles</a></li>
+                <li><a href="../../resume.pdf" target="_blank">Resume</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div>
+        <img src="snake.jpg" alt="" class="bg_image">
+    </div>
+
+
+    <div class="content">
+        <div class="title">
+            <p>The Brief</p>
+        </div>
+
+        <p>
+            The game "Snake" is a classic and simple arcade game that dates back to the late 1970s and early 1980s. The game's objective is straightforward: control a snake on a grid, guiding it to eat fruit that appears randomly. As the snake consumes the fruit, it grows in length. The challenge comes from the fact the player must pilot the snake without colliding with the grid walls or the snake's own growing body.
+            <br><br>
+            I decided to use an artificial neural network to solve this problem for two main reasons. First, I thought it would be interesting to see the network evolve over time, trying to learn what to do in any given situation, and see if it could learn to avoid trapping itself. Second, I hadn’t done anything with neural networks so far and I think they are really cool!
+            <br><br>
+            As a quick explanation, artificial neural networks are like a digital version of our brains. They consist of interconnected nodes, or artificial neurons, forming layers that process information hierarchically. Both artificial neural networks and our brains learn from experience, adjusting connections based on feedback, allowing us to adapt and recognize patterns.
+            <br><br>
+            One issue that arises with this approach is finding a training data set. One approach would be to collect a ton of different states the snake could be in and provide a correct answer to create a dataset to train on. However this would be extremely time consuming, and certain states can be ambiguous on what the "best" move is.
+            <br><br>
+            An alternative solution is to use another technique from the real world, evolution. Called the genetic algorithm, we can create many artificial neural networks, let them each play the game, and choose the best ones to move onto the next generation after reproducing (and with small mutations). By iterating over this process, we hopefully will help push the artificial neural networks towards an optimal solution, being able to play snake well!
+            <br><br>
+            This was coded in Python. To access my python file, click
+            <a href="https://github.com/matthewconnelltombs/snake" target="_blank">here</a>.
+            <br><br>
+            Want to try your hand at Snake? You can find the game
+            <a href="https://g.co/kgs/uPbzYaC" target="_blank">here</a>.
+        </p>
+
+        <div class="title">
+            <p>The Results</p>
+        </div>
+
+        <p>
+            My final neural network consisted of four layers, an input layer of 24 nodes, two middle layers of 16 and 8 nodes, and an output layer of 3 nodes. The inputs for the neural network are the distances to the wall, the snake's own body, and the apple (if it can see it), in each cardinal and ordinal (diagonal) direction. The outputs are left, straight, or right.
+        </p>
+
+        <p>
+            Here are some things I tried while making the AI along with the results/my thoughts.
+        </p>
+
+        <ul>
+            <li>Increase the size of the middle layers.</li>
+            <ul><li>This increased training time without a noticeable improvement in performance.</li></ul>
+
+            <li>Adding four additional inputs, one-hot encoded for which direction the snake was currently going.</li>
+            <ul><li>Didn’t see a change in performance, and realized the inputs giving the distance to the snake's own body should communicate similar information.</li></ul>
+
+            <li>Having four outputs, corresponding to the four cardinal directions.</li>
+            <ul><li>The biggest issue with this came from the snake moving backwards on itself, killing itself. The switch to three movements eliminated this option. (This also better aligns with the original game)</li></ul>
+
+            <li>No energy stat.</li>
+            <ul><li>Originally I had the snake play until it died (crashing into a wall or itself). This was a big mistake as the neural network learned to run in a circle, avoiding death forever. I then gave it a lifespan that was extended/reset by eating fruits.</li></ul>
+
+            <li>Using the ReLU function for the middle layer.</li>
+            <ul><li>I tried this and found the snake refused to learn. I might have needed to structure my inputs differently, or have given the network more time to learn, but the sigmoid function showed much better success for me.</li></ul>
+
+            <li>Increasing population size.</li>
+            <ul><li>I started with a population size of 200 and later tried increasing it to 1000, however found the time-performance tradeoff not to be worth it.</li></ul>
+
+            <li>Uniform Crossover versus Two-Point Crossover.</li>
+            <ul><li>I had originally started with uniform crossover, however switching to two-point crossover seems to have been the right decision as this greatly improved the performance of the networks.</li></ul>
+
+            <li>Using three layers instead of four layers</li>
+            <ul><li>This showed similar learning rates early on, however wasn’t able to learn more complex strategies to achieve higher scores.</li></ul>
+        </ul>
+
+        <p>
+            At the beginning, the initial population is formed by assigning random weights to the neurons in each neural network. Below are two examples of networks created randomly. As we can see, these networks exhibit no intelligence; one snakes in circles until it dies, while the other misses the fruit and crashes into a wall.
+        </p>
+        
+        <div class="video-container">
+            <video autoplay loop muted width="30%" height="30%" style="margin: 10px;">
+                <source type="video/mp4" src="videos/1_gen_1.mp4">
+            </video>
+            <video autoplay loop muted width="30%" height="30%" style="margin: 10px;">
+                <source type="video/mp4" src="videos/1_gen_2.mp4">
+            </video>
+        </div>
+
+        <p>
+            By generation 100, we observe significant improvement. The AI successfully locates the fruit and has adopted a key strategy: sticking close to the wall while collecting fruit, which helps it avoid colliding with itself. This marks a positive development in the AI’s learning process.
+        </p>
+
+        <div class="video-container">
+            <video autoplay loop muted width="30%" height="30%" style="margin: 10px;">
+                <source type="video/mp4" src="videos/100_gen.mp4">
+            </video>
+        </div>
+
+        <p>
+            By generation 1000, the improvements are really impressive. While the AI tends to move diagonally – an unusual choice – it has embraced a more complex strategy, before collecting a fruit, coiling its body on the opposite side of the board. This tactic helps prevent it from getting trapped either in its own growing body, or between its body and a wall. Impressively, this network reached a snake length of 42 out of a possible 64, edging closer to a perfect game!
+        </p>
+
+        <div class="video-container">
+            <video autoplay loop muted width="30%" height="30%" style="margin: 10px;">
+                <source type="video/mp4" src="videos/final.mp4">
+            </video>
+        </div>
+
+        <p>
+            For fitness performance, I tracked the population's highest scoring snake length and mean fitness trimmed by 20%. I did this to try and ensure any very poorly or strongly performing networks didn’t skew the mean.
+        </p>
+
+        <div style="display: flex; justify-content: center;">
+            <img src="snake_graph.jpg" style="width: 90%">
+        </div>
+
+        <p style="font-size: 40px">
+            Conclusion
+        </p>
+
+        <p>
+            While my Snake AI is not perfect, it is able to put up formidable scores in the game. This project has helped me get a better understanding of the mechanism behind artificial neural networks and a lot of the decisions making and fine tuning that needs to be done to make a successful network. It also taught me a lot of patience because neural networks can take a long time to train!
+        </p>
+
+    </div>
+
+
+    <script src="../project_photos.js"></script>
+
+
+</body>
+</html>
